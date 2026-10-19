@@ -265,7 +265,8 @@
               "antigravity",
               "kimi",
               "zcode",
-              "grokbot"
+              "grokbot",
+              "chatanywhere"
             ]
           },
           "uniqueItems": true,
@@ -277,7 +278,8 @@
             "antigravity",
             "kimi",
             "zcode",
-            "grokbot"
+            "grokbot",
+            "chatanywhere"
           ],
           "markdownDescription": "%config.quotaProviders%",
           "order": 7

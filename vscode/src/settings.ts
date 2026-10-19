@@ -15,7 +15,7 @@ export type Settings = {
 
 const PERIODS: Period[] = ['today', 'week', '30days', 'month', 'all', 'lifetime']
 const FORMATS: StatusBarFormat[] = ['cost', 'costAndQuota', 'workspace', 'hidden']
-export const QUOTA_PROVIDERS: ProviderName[] = ['claude', 'codex', 'gemini', 'copilot', 'antigravity', 'kimi', 'zcode', 'grokbot']
+export const QUOTA_PROVIDERS: ProviderName[] = ['claude', 'codex', 'gemini', 'copilot', 'antigravity', 'kimi', 'zcode', 'grokbot', 'chatanywhere']
 
 function pick<T extends string>(value: unknown, allowed: readonly T[], fallback: T): T {
   return typeof value === 'string' && (allowed as readonly string[]).includes(value) ? value as T : fallback
