@@ -2,6 +2,7 @@ import os from 'node:os'
 import path from 'node:path'
 
 import { fetchAntigravityQuota } from './antigravity'
+import { fetchChatAnywhereQuota } from './chatanywhere'
 import { fetchClaudeQuota } from './claude'
 import { fetchCodexQuota } from './codex'
 import { fetchCopilotQuota } from './copilot'
@@ -27,6 +28,7 @@ type QuotaDeps = {
   kimi: (options: FetcherOptions) => Promise<FetchResult>
   zcode: (options: FetcherOptions) => Promise<FetchResult>
   grokbot: (options: FetcherOptions) => Promise<FetchResult>
+  chatanywhere: (options: FetcherOptions) => Promise<FetchResult>
   grokbotInstalled: () => boolean
   statePath: string
   readFile: typeof readSecureFile
@@ -35,7 +37,7 @@ type QuotaDeps = {
   refreshMs: number
 }
 
-const PROVIDERS: ProviderName[] = ['claude', 'codex', 'gemini', 'copilot', 'antigravity', 'kimi', 'zcode', 'grokbot']
+const PROVIDERS: ProviderName[] = ['claude', 'codex', 'gemini', 'copilot', 'antigravity', 'kimi', 'zcode', 'grokbot', 'chatanywhere']
 
 const defaultDeps: QuotaDeps = {
   claude: fetchClaudeQuota,
@@ -48,6 +50,7 @@ const defaultDeps: QuotaDeps = {
   kimi: fetchKimiQuota,
   zcode: fetchZcodeQuota,
   grokbot: options => fetchGrokbotQuota({ signal: options.signal }),
+  chatanywhere: options => fetchChatAnywhereQuota({ signal: options.signal }),
   grokbotInstalled,
   statePath: path.join(os.homedir(), '.codeburn', 'quota-backoff.json'),
   readFile: readSecureFile,

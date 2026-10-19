@@ -19,6 +19,7 @@ const LOGIN: Record<QuotaProvider['provider'], { command?: string; hintKey?: str
   kimi: { command: 'kimi', hintKey: 'shell.connect.signInPrompt' },
   zcode: { noteKey: 'shell.connect.zcode.note' },
   grokbot: { noteKey: 'shell.connect.grokbot.note' },
+  chatanywhere: { noteKey: 'shell.connect.chatanywhere.note' },
 }
 
 /** Inline affordance for a disconnected or access-denied provider: a short
