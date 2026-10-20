@@ -16,7 +16,7 @@ describe('readSettings', () => {
       statusBarFormat: 'cost',
       currency: '',
       provider: 'all',
-      quotaProviders: ['claude', 'codex', 'gemini', 'copilot', 'antigravity', 'kimi', 'zcode', 'grokbot'],
+      quotaProviders: ['claude', 'codex', 'gemini', 'copilot', 'antigravity', 'kimi', 'zcode', 'grokbot', 'chatanywhere'],
       nodePath: '',
     })
   })
@@ -61,7 +61,7 @@ describe('webviewSeed', () => {
     const seed = webviewSeed(readSettings(from({ defaultPeriod: 'week', refreshInterval: '5m', quotaProviders: ['claude'] })))
     expect(seed['codeburn.defaultPeriod']).toBe('week')
     expect(seed['codeburn.refreshInterval']).toBe('5m')
-    expect(JSON.parse(seed['codeburn.quotaDisabled']!)).toEqual(['codex', 'gemini', 'copilot', 'antigravity', 'kimi', 'zcode', 'grokbot'])
+    expect(JSON.parse(seed['codeburn.quotaDisabled']!)).toEqual(['codex', 'gemini', 'copilot', 'antigravity', 'kimi', 'zcode', 'grokbot', 'chatanywhere'])
   })
 })
 

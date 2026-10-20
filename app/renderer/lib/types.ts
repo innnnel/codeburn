@@ -40,7 +40,7 @@ export type QuotaWindow = {
 }
 
 export type QuotaProvider = {
-  provider: 'claude' | 'codex' | 'gemini' | 'copilot' | 'antigravity' | 'kimi' | 'zcode' | 'grokbot'
+  provider: 'claude' | 'codex' | 'gemini' | 'copilot' | 'antigravity' | 'kimi' | 'zcode' | 'grokbot' | 'chatanywhere'
   /** `keychainUnchecked` is darwin-only and distinct from `disconnected`: no
    *  credential file was found and the keychain has NOT been looked at yet
    *  (a keychain read raises a one-time macOS dialog, so only a user-initiated
