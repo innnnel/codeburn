@@ -2,6 +2,19 @@ import { t } from '../i18n'
 import { isEstimatedCost } from './format'
 import type { MenubarPayload, ProviderName } from './types'
 
+const CHATANYWHERE_BALANCE = /^Balance · (-?\d+\.\d{2}) CA$/
+const CHATANYWHERE_REPASTE = 'Paste chatanywhere-session into ~/.config/codeburn/chatanywhere.json again, then refresh.'
+
+/** ChatAnywhere's footer is an English sentence from the main process. The
+ *  catalogs own the visible copy, including 余额 · {amount} CA. */
+export function localizeQuotaFooter(provider: ProviderName, line: string): string {
+  if (provider !== 'chatanywhere') return line
+  const amount = CHATANYWHERE_BALANCE.exec(line)
+  if (amount) return t('plans.quota.chatanywhere.balance', { amount: amount[1]! })
+  if (line === CHATANYWHERE_REPASTE) return t('plans.quota.chatanywhere.repaste')
+  return line
+}
+
 export const PROVIDER_NAMES: Record<ProviderName, string> = {
   claude: 'Claude',
   codex: 'Codex',
@@ -11,6 +24,7 @@ export const PROVIDER_NAMES: Record<ProviderName, string> = {
   kimi: 'Kimi Code',
   zcode: 'ZCode',
   grokbot: 'Grok Bot',
+  chatanywhere: 'ChatAnywhere',
 }
 
 /** Company named in honest copy like "Anthropic rate limited the quota endpoint". */
@@ -25,6 +39,7 @@ export const PROVIDER_OWNERS: Record<ProviderName, string> = {
   // The weekly allowance is served by Cursor's dashboard, so Cursor is who
   // rate limits it.
   grokbot: 'Cursor',
+  chatanywhere: 'ChatAnywhere',
 }
 
 const ALL_PROVIDERS = Object.keys(PROVIDER_NAMES) as ProviderName[]

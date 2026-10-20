@@ -20,7 +20,7 @@ import { projectHidePattern, projectNamedBy, projectPattern, projectVisible } fr
 import { displayVersion, isIdeHost, shortcutLabel } from '../lib/platform'
 import { motionClass } from '../lib/motion'
 import { clearOverviewHeadlines } from '../lib/overviewSnapshot'
-import { detectedProviders, PROVIDER_NAMES, QUOTA_PROVIDERS, readDisabledProviders, writeDisabledProviders } from '../lib/providers'
+import { detectedProviders, localizeQuotaFooter, PROVIDER_NAMES, QUOTA_PROVIDERS, readDisabledProviders, writeDisabledProviders } from '../lib/providers'
 import { REFRESH_OPTIONS, useRefreshCadence } from '../lib/refreshCadence'
 import { reportMemoKey } from '../lib/reportMemoKey'
 import { showToast } from '../lib/toast'
@@ -540,7 +540,7 @@ function DetectedRow({ quota, enabled, onToggle, onReconnect }: { quota: QuotaPr
       : quota.rateLimited
       ? <span className="r set-status"><span className="set-dot" />{rateLimitedNote(quota.provider)}</span>
       : quota.connection === 'terminalFailure'
-      ? <span className="r set-status"><span className="set-dot" />{quota.footerLines[0] ?? t('settings.plans.quotaUnavailable')}</span>
+      ? <span className="r set-status"><span className="set-dot" />{quota.footerLines[0] ? localizeQuotaFooter(quota.provider, quota.footerLines[0]) : t('settings.plans.quotaUnavailable')}</span>
       : <span className="r set-status"><span className="set-dot ok" />{quota.planLabel ?? t('settings.plans.connected')}</span>}
     <button type="button" role="switch" aria-checked={enabled} aria-label={t('settings.plans.liveQuotaAriaLabel', { provider: PROVIDER_NAMES[quota.provider] })} className={enabled ? 'switch on' : 'switch'} onClick={onToggle}><span className="switch-knob" /></button>
   </div>

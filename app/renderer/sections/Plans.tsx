@@ -13,7 +13,7 @@ import { localeTag, t } from '../i18n'
 import { formatConverted, formatResetTime } from '../lib/format'
 import { codeburn } from '../lib/ipc'
 import { motionClass } from '../lib/motion'
-import { PROVIDER_NAMES, PROVIDER_OWNERS, readDisabledProviders } from '../lib/providers'
+import { localizeQuotaFooter, PROVIDER_NAMES, PROVIDER_OWNERS, readDisabledProviders } from '../lib/providers'
 import { reportMemoKey } from '../lib/reportMemoKey'
 import type { JsonPlanSummary, Period, PlanId, PlanProvider, QuotaProvider, QuotaWindow, StatusJson } from '../lib/types'
 import type { SettingsPane } from './Settings'
@@ -314,7 +314,7 @@ function QuotaContent({ quota, onReconnect }: { quota: QuotaProvider; onReconnec
     // An auth expiry (or a capped "waiting") is recoverable: show the same
     // Connect affordance the disconnected state uses, keeping the error line.
     if (quota.connectable) {
-      return <ConnectAffordance provider={quota.provider} connection="disconnected" onRefresh={onReconnect} message={quota.footerLines[0]} />
+      return <ConnectAffordance provider={quota.provider} connection="disconnected" onRefresh={onReconnect} message={quota.footerLines[0] ? localizeQuotaFooter(quota.provider, quota.footerLines[0]) : undefined} />
     }
     // A genuinely terminal provider (a retired Gemini tier, no allowance) says
     // why; the generic line is the fallback. No action to offer.
@@ -327,7 +327,7 @@ function QuotaContent({ quota, onReconnect }: { quota: QuotaProvider; onReconnec
         {quota.details.map((window, index) => <QuotaMeter key={`${window.label}-${index}`} window={window} />)}
       </div>
       {quota.footerLines.length > 0 ? (
-        <div className="quota-footer">{quota.footerLines.map((line, index) => <span key={`${line}-${index}`}>{line}</span>)}</div>
+        <div className="quota-footer">{quota.footerLines.map((line, index) => <span key={`${line}-${index}`}>{localizeQuotaFooter(quota.provider, line)}</span>)}</div>
       ) : null}
     </>
   )
